@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="w1_base">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="w1bot">
 	
   <xacro:property name="base_width" value="0.16"/>
   <xacro:property name="base_len" value="0.16"/>
@@ -12,7 +12,7 @@
   <xacro:property name="caster_wheel_mass" value="0.001"/>
   <xacro:property name="caster_wheel_joint_offset" value="-0.052"/>
 
-  <xacro:include filename="$(find w1_base_description)/urdf/w1_base_gazebo_plugins.xacro" />
+  <xacro:include filename="$(find w1bot_description)/urdf/w1bot_gazebo_plugins.xacro" />
 
   <!--Color Properties-->
   <material name="blue">

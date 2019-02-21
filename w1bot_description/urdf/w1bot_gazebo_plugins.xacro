@@ -11,8 +11,8 @@
       <wheelSeparation>${wheel_separation}</wheelSeparation>
       <wheelDiameter>${wheel_radius * 2}</wheelDiameter>
       <torque>20</torque>
-      <commandTopic>/w1/base_controller/cmd_vel</commandTopic>
-      <odometryTopic>/w1/base_controller/odom</odometryTopic>
+      <commandTopic>/w1/w1bot_base_controller/cmd_vel</commandTopic>
+      <odometryTopic>/w1/gazebo_base_controller/odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
       <robotBaseFrame>base_footprint</robotBaseFrame>
     </plugin>

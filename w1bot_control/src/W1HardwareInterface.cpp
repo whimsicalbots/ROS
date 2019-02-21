@@ -12,12 +12,15 @@ namespace w1_ros_ramps
         vel = new double[2];
         eff = new double[2];
         cmd = new double[2];
+        last_cmd = new double[2];
 
         for(int i = 0; i < 2; i++) {
             pos[i] = 0;
             vel[i] = 0;
             eff[i] = 0;
             cmd[i] = 0;
+            last_cmd[i] = NAN;
+
         }
     //    std::string joint_name = "left_wheel_joint";
         hardware_interface::JointStateHandle state_handle_l("left_wheel_joint", &pos[0], &vel[0], &eff[0]);
@@ -39,13 +42,22 @@ namespace w1_ros_ramps
     }
 
     void W1HardwareInterface::write() {
-        ROS_INFO_STREAM("w cmd 0: " << cmd[0] << ", pos 0: "<< pos[0]<< ", vel 0: "<<vel[0]<< ", eff 0: "<<eff[0]);
-        ROS_INFO_STREAM("w cmd 1: " << cmd[1] << ", pos 1: "<< pos[1]<< ", vel 1: "<<vel[1]<< ", eff 1: "<<eff[1]);
+        bool changed_cmd = false;
+        for (int i  = 0; i < 2; i++) {
+            if(last_cmd[i] != cmd[i]) {
+                changed_cmd = true;
+                last_cmd[i] = cmd[i];
+            }
+        }
+        if(changed_cmd) {
+            ROS_INFO_STREAM("w cmd 0: " << cmd[0] << ", cmd 1: "<< cmd[1]);
+        }
+        
     }
 
     void W1HardwareInterface::read() {
-        ROS_INFO_STREAM("R cmd 0: " << cmd[0] << ", pos 0: "<< pos[0]<< ", vel 0: "<<vel[0]<< ", eff 0: "<<eff[0]);
-        ROS_INFO_STREAM("R cmd 1: " << cmd[1] << ", pos 1: "<< pos[1]<< ", vel 1: "<<vel[1]<< ", eff 1: "<<eff[1]);
+        //ROS_INFO_STREAM("R cmd 0: " << cmd[0] << ", pos 0: "<< pos[0]<< ", vel 0: "<<vel[0]<< ", eff 0: "<<eff[0]);
+        //ROS_INFO_STREAM("R cmd 1: " << cmd[1] << ", pos 1: "<< pos[1]<< ", vel 1: "<<vel[1]<< ", eff 1: "<<eff[1]);
     }
 
 }

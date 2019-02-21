@@ -24,16 +24,16 @@ rampsV_Z:
   type: velocity_controllers/JointVelocityController
   joint: joint_z
 
-
 left_wheel_joint:
   type: velocity_controllers/JointVelocityController
   joint: joint_x
 
-rampsJointState:
+# w1 base
+w1bot_state:
   type: joint_state_controller/JointStateController
   publish_rate: 10
 
-rampsDiffController:
+w1bot_base_controller:
   type: "diff_drive_controller/DiffDriveController"
   left_wheel: 'left_wheel_joint'
   right_wheel: 'right_wheel_joint'

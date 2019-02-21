@@ -12,12 +12,13 @@ namespace w1_ros_ramps
     private:
         hardware_interface::JointStateInterface jnt_state_interface;
         hardware_interface::VelocityJointInterface jnt_vel_interface;
-
+        
         double *cmd;
         double *pos;
         double *vel;
         double *eff;
-
+        double *last_cmd;
+        
     public:
         W1HardwareInterface();
         virtual ~W1HardwareInterface();
