@@ -1,0 +1,25 @@
+<launch>
+	<group ns="w1">
+	 	
+		<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find w1_base_description)/urdf/w1_base.xacro'" />
+
+		<!-- load the controllers  -->
+	  	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+	    output="screen" args="rampsJointState rampsDiffController --shutdown-timeout 0.1"/>
+	  	
+	 	<node pkg="w1_ramps" type="w1_ramps_node" name="ramps" output="screen" >
+	 		<param name="port" value="/dev/ttyUSB0" />
+			<param name="rate" value="1" />	 
+			<param name="baudrate" value="9600" />	
+			<param name="bytesize" value="8" />			
+			<param name="parity" value="0" />			
+			<param name="stopbits" value="1" />
+			<param name="flowcontrol" value="0" />
+			<param name="mode" value="velocity" />			
+	 	</node>	
+	 	
+	 	<!-- Load joint controller configurations from YAML file to parameter server -->
+	  	<rosparam file="$(find w1_ramps)/config/ramps.yaml" command="load"/>
+
+	</group>		
+</launch>

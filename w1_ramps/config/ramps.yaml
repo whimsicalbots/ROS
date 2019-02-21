@@ -1,0 +1,56 @@
+#Position
+rampsP_X:
+  type: position_controllers/JointPositionController
+  joint: joint_x
+  
+rampsP_Y:
+  type: position_controllers/JointPositionController
+  joint: joint_y
+  
+rampsP_Z:
+  type: position_controllers/JointPositionController
+  joint: joint_z
+
+#Velocity
+rampsV_X:
+  type: velocity_controllers/JointVelocityController
+  joint: X
+  
+rampsV_Y:
+  type: velocity_controllers/JointVelocityController
+  joint: joint_y
+  
+rampsV_Z:
+  type: velocity_controllers/JointVelocityController
+  joint: joint_z
+
+
+left_wheel_joint:
+  type: velocity_controllers/JointVelocityController
+  joint: joint_x
+
+rampsJointState:
+  type: joint_state_controller/JointStateController
+  publish_rate: 10
+
+rampsDiffController:
+  type: "diff_drive_controller/DiffDriveController"
+  left_wheel: 'left_wheel_joint'
+  right_wheel: 'right_wheel_joint'
+  pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
+  twist_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
+
+JointPosGroup:
+  type: "position_controllers/JointGroupPositionController"
+  joints:
+    - joint_x
+    - joint_y
+    - joint_z
+    
+JointTrajectory:
+  type: "position_controllers/JointTrajectoryController"
+  joints:
+    - joint_x
+    - joint_y
+    - joint_z
+
