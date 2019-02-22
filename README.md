@@ -19,9 +19,12 @@ mkdir lib
 cd lib
 ln -s ~/Arduino/libraries/ros_lib/ ros_lib
 ```
-also install AccelStepper lib in similar way.
+also install AccelStepper lib
+`git clone https://github.com/waspinator/AccelStepper.git`
+
 
 Plug RAMP board into USB. 
+`sudo chmod a+rw /dev/ttyUSB0 `
 
 //TODO going to setup in CMakeList for project.  For now...
 
