@@ -79,7 +79,7 @@ void setup()
   stepper_Y.setAcceleration(10000);
   stepper_Y.setMaxSpeed(10000);
   stepper_Y.setEnablePin(Y_ENABLE_PIN);
-  stepper_Y.setPinsInverted(false, false, true);
+  stepper_Y.setPinsInverted(true, false, true);  // invert direction so diff drive works //TODO should this be done differently?
   stepper_Y.enableOutputs();
   
   stepper_Z.setAcceleration(10000);
