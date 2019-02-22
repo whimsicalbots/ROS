@@ -12,6 +12,14 @@ catkin_make
 ```
 ### Install firmware
 Currently using [platformio](https://platformio.org) to install firmware into Arduino.
+//TODO add something to add libs to platformio project.
+``` 
+cd ~/catkin_ws/src/ROS/w1bot_control/platformio/ramps
+mkdir lib
+cd lib
+ln -s ~/Arduino/libraries/ros_lib/ ros_lib
+```
+also install AccelStepper lib in similar way.
 
 Plug RAMP board into USB. 
 
