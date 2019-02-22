@@ -2,7 +2,7 @@
 #include <hardware_interface/joint_command_interface.h>
 #include <hardware_interface/joint_state_interface.h>
 #include <hardware_interface/robot_hw.h>
-#include <std_msgs/Float64.h>
+#include <w1bot_control/MotorSpeed.h>
 
 namespace w1_ros_ramps
 {
