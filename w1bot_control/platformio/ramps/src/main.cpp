@@ -2,6 +2,7 @@
 #include <std_srvs/SetBool.h>
 #include <std_msgs/Float64.h>
 #include <AccelStepper.h>
+#include <w1bot_control/MotorSpeed.h>
 
 ros::NodeHandle nh;
 AccelStepper stepper_left(AccelStepper::DRIVER, 54, 55);
@@ -31,9 +32,9 @@ public:
     }
   }
 
-  void set_period_callback(const std_msgs::Float64& msg)
+  void set_period_callback(const w1bot_control::MotorSpeed& msg)
   {
-    period_ = msg.data;
+    period_ = msg.speed;
     stepper_left.setSpeed(period_);
   }
 
@@ -53,7 +54,7 @@ private:
   bool active_ = true;
   float period_;
   uint32_t last_time_;
-  ros::Subscriber<std_msgs::Float64, Blinker> subscriber_;
+  ros::Subscriber<w1bot_control::MotorSpeed, Blinker> subscriber_;
   ros::ServiceServer<std_srvs::SetBool::Request, std_srvs::SetBool::Response, Blinker> service_server_;
 };
 
