@@ -15,7 +15,7 @@ namespace w1_ros_ramps
         eff = new double[2];
         cmd = new double[2];
         last_cmd = new double[2];
-
+        
         for(int i = 0; i < 2; i++) {
             pos[i] = 0;
             vel[i] = 0;
@@ -44,20 +44,26 @@ namespace w1_ros_ramps
     }
 
     void W1HardwareInterface::write() {
-        bool changed_cmd = false;
+        bool cmd_changed = false;
+
         for (int i  = 0; i < 2; i++) {
             if(last_cmd[i] != cmd[i]) {
-                changed_cmd = true;
                 last_cmd[i] = cmd[i];
+                cmd_changed = true;
             }
         }
-        if(changed_cmd) {
-            ROS_INFO_STREAM("w cmd 0: " << cmd[0] << ", cmd 1: "<< cmd[1]);
-            w1bot_control::MotorSpeed val;
-            val.speed = cmd[0] * 100;
-            pub.publish(val);
+
+        if(cmd_changed) {
+            for (int i  = 0; i < 2; i++) {
+                // send command 
+                ROS_INFO_STREAM("changed in: " << i << " cmd 0: " << cmd[0] << ", cmd 1: "<< cmd[1]);
+                w1bot_control::MotorSpeed m_cmd;
+                m_cmd.motor = i;
+                m_cmd.speed = cmd[i] * power_factor;
+                pub.publish(m_cmd);
+            }
+            
         }
-        
     }
 
     void W1HardwareInterface::read() {
