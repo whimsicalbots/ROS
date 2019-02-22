@@ -14,6 +14,10 @@ catkin_make
 Currently using [platformio](https://platformio.org) to install firmware into Arduino.
 //TODO add something to add libs to platformio project.
 ``` 
+source ~/catkin_ws/install/setup.bash
+source ~/catkin_ws/devel/setup.bash
+rm -r ~/Arduino/libraries/ros_lib    #necessary so the next script can creat them
+rosrun rosserial_arduino make_libraries.py ~/Arduino/libraries
 cd ~/catkin_ws/src/ROS/w1bot_control/platformio/ramps
 mkdir lib
 cd lib
