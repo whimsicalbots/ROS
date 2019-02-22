@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
     ROS_INFO_STREAM("Rate: "<<rate);
     ros::Rate loop_rate(rate);    
 
-    w1_ros_ramps::W1HardwareInterface robot;
+    w1_ros_ramps::W1HardwareInterface robot(nh);
     
     controller_manager::ControllerManager cm(&robot, n);    
     ros::Time ts = ros::Time::now();

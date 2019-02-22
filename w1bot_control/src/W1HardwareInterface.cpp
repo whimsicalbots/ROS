@@ -3,11 +3,13 @@
 namespace w1_ros_ramps
 {
 
-    W1HardwareInterface::W1HardwareInterface() {
+    W1HardwareInterface::W1HardwareInterface(ros::NodeHandle& root_nh) {
         ROS_INFO_STREAM("in costructer");
+    
         registerInterface(&jnt_state_interface);
         registerInterface(&jnt_vel_interface);
 
+        pub = root_nh.advertise<std_msgs::Float64>("/set_blink_period", 10);
         pos = new double[2];
         vel = new double[2];
         eff = new double[2];
@@ -51,6 +53,9 @@ namespace w1_ros_ramps
         }
         if(changed_cmd) {
             ROS_INFO_STREAM("w cmd 0: " << cmd[0] << ", cmd 1: "<< cmd[1]);
+            std_msgs::Float64 val;
+            val.data = cmd[0] * 100;
+            pub.publish(val);
         }
         
     }

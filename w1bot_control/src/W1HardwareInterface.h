@@ -2,6 +2,7 @@
 #include <hardware_interface/joint_command_interface.h>
 #include <hardware_interface/joint_state_interface.h>
 #include <hardware_interface/robot_hw.h>
+#include <std_msgs/Float64.h>
 
 namespace w1_ros_ramps
 {
@@ -10,6 +11,7 @@ namespace w1_ros_ramps
 
     
     private:
+        ros::Publisher pub;
         hardware_interface::JointStateInterface jnt_state_interface;
         hardware_interface::VelocityJointInterface jnt_vel_interface;
         
@@ -20,7 +22,7 @@ namespace w1_ros_ramps
         double *last_cmd;
         
     public:
-        W1HardwareInterface();
+        W1HardwareInterface(ros::NodeHandle& root_nh);
         virtual ~W1HardwareInterface();
         void write();
         void read();
