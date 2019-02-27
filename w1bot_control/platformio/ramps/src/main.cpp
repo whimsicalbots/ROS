@@ -15,13 +15,13 @@ AccelStepper stepper_E1(AccelStepper::DRIVER, E1_STEP_PIN, E1_DIR_PIN);
 
 MultiStepper multistepper;
 
-class Blinker
+class MotorHandler
 {
 public:
-  Blinker(byte pin, float period)
+  MotorHandler(byte pin, float period)
   : pin_(pin), period_(period),
-    subscriber_("set_blink_period", &Blinker::set_period_callback, this),
-    service_server_("activate_blinker", &Blinker::service_callback, this)
+    subscriber_("set_blink_period", &MotorHandler::set_period_callback, this),
+    service_server_("activate_blinker", &MotorHandler::service_callback, this)
   {}
 
   void init(ros::NodeHandle& nh)
@@ -61,11 +61,11 @@ private:
   bool active_ = true;
   float period_;
   uint32_t last_time_;
-  ros::Subscriber<w1bot_control::MotorSpeed, Blinker> subscriber_;
-  ros::ServiceServer<std_srvs::SetBool::Request, std_srvs::SetBool::Response, Blinker> service_server_;
+  ros::Subscriber<w1bot_control::MotorSpeed, MotorHandler> subscriber_;
+  ros::ServiceServer<std_srvs::SetBool::Request, std_srvs::SetBool::Response, MotorHandler> service_server_;
 };
 
-Blinker blinker(LED_BUILTIN, 500);
+MotorHandler motorHandler(LED_BUILTIN, 500);
 
 void setup()
 {
@@ -106,7 +106,7 @@ void setup()
   multistepper.addStepper(stepper_E1);
 
   nh.initNode();
-  blinker.init(nh);
+  motorHandler.init(nh);
 
 }
 
@@ -115,7 +115,7 @@ void loop()
   for (int i = 0; i < 5; i++) {
     multistepper.getStepper(i)->runSpeed();
   }
-  blinker.run();
+  motorHandler.run();
   nh.spinOnce();
   delay(1);
 }
