@@ -26,6 +26,6 @@
     args="-urdf -model w1bot -param robot_description"/>
 
   <!-- ros_control w1bot launch file -->
-  <!--include file="$(find w1bot_control)/launch/w1bot_control.launch" /-->
+  <include file="$(find w1bot_control)/launch/w1bot_control.launch" />
 
 </launch>
