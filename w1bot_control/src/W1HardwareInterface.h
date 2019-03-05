@@ -20,7 +20,7 @@ namespace w1_ros_ramps
         double *vel;
         double *eff;
         double *last_cmd;
-        float power_factor = 10;
+        //float power_factor = 10;
         
     public:
         W1HardwareInterface(ros::NodeHandle& root_nh);

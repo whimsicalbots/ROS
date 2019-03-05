@@ -59,7 +59,7 @@ namespace w1_ros_ramps
                 ROS_INFO_STREAM("changed in: " << i << " cmd 0: " << cmd[0] << ", cmd 1: "<< cmd[1]);
                 w1bot_control::MotorSpeed m_cmd;
                 m_cmd.motor = i;
-                m_cmd.speed = cmd[i] * power_factor;
+                m_cmd.speed = cmd[i] * 10;
                 pub.publish(m_cmd);
             }
             
