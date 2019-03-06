@@ -20,7 +20,7 @@ class MotorHandler
 public:
   MotorHandler(byte pin, float period)
   : pin_(pin), period_(period),
-    subscriber_("set_blink_period", &MotorHandler::set_period_callback, this),
+    subscriber_("set_motor_speed", &MotorHandler::set_period_callback, this),
     service_server_("activate_blinker", &MotorHandler::service_callback, this)
   {}
 

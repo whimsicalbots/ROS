@@ -9,7 +9,7 @@ namespace w1_ros_ramps
         registerInterface(&jnt_state_interface);
         registerInterface(&jnt_vel_interface);
 
-        pub = root_nh.advertise<w1bot_control::MotorSpeed>("/set_blink_period", 10);
+        pub = root_nh.advertise<w1bot_control::MotorSpeed>("/set_motor_speed", 10);
         pos = new double[2];
         vel = new double[2];
         eff = new double[2];
