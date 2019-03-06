@@ -42,7 +42,12 @@ public:
 
   void set_period_callback(const w1bot_control::MotorSpeed& msg)
   {
-    multistepper.getStepper(msg.motor)->setSpeed(msg.speed);
+    if(msg.speed != 0.0) {
+      multistepper.getStepper(msg.motor)->enableOutputs();
+      multistepper.getStepper(msg.motor)->setSpeed(msg.speed);
+    } else {
+      multistepper.getStepper(msg.motor)->disableOutputs();
+    }    
   }
 
   void service_callback(const std_srvs::SetBool::Request& req,
@@ -73,32 +78,27 @@ void setup()
   stepper_X.setMaxSpeed(10000);
   stepper_X.setEnablePin(X_ENABLE_PIN);
   stepper_X.setPinsInverted(false, false, true);
-  stepper_X.enableOutputs();  //TODO move enable to service, so that it can be switched on and off to save energy
   
   stepper_Y.setAcceleration(10000);
   stepper_Y.setMaxSpeed(10000);
   stepper_Y.setEnablePin(Y_ENABLE_PIN);
   stepper_Y.setPinsInverted(true, false, true);  // invert direction so diff drive works //TODO should this be done differently?
-  stepper_Y.enableOutputs();
   
   stepper_Z.setAcceleration(10000);
   stepper_Z.setMaxSpeed(10000);
   stepper_Z.setEnablePin(Z_ENABLE_PIN);
   stepper_Z.setPinsInverted(false, false, true);
-  stepper_Z.enableOutputs();
-
+  
   stepper_E0.setAcceleration(10000);
   stepper_E0.setMaxSpeed(10000);
   stepper_E0.setEnablePin(E0_ENABLE_PIN);
   stepper_E0.setPinsInverted(false, false, true);
-  stepper_E0.enableOutputs();
-
+  
   stepper_E1.setAcceleration(10000);
   stepper_E1.setMaxSpeed(10000);
   stepper_E1.setEnablePin(E1_ENABLE_PIN);
   stepper_E1.setPinsInverted(false, false, true);
-  stepper_E1.enableOutputs();
-
+  
   multistepper.addStepper(stepper_X);
   multistepper.addStepper(stepper_Y);
   multistepper.addStepper(stepper_Z);

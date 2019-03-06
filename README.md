@@ -26,6 +26,21 @@ ln -s ~/Arduino/libraries/ros_lib/ ros_lib
 also install AccelStepper lib
 `git clone https://github.com/waspinator/AccelStepper.git`
 
+add getStepper method to MultiStepper.h
+```
+AccelStepper* getStepper(int num)
+    {
+    	if(num<_num_steppers)
+    	{
+    		return _steppers[num];
+    	}
+    	else
+    	{
+    		return 0;
+    	}
+    }
+    ```
+    
 
 Plug RAMP board into USB. 
 `sudo chmod a+rw /dev/ttyUSB0 `
