@@ -27,6 +27,7 @@ also install AccelStepper lib
 `git clone https://github.com/waspinator/AccelStepper.git`
 
 add getStepper method to MultiStepper.h
+
 ```
 AccelStepper* getStepper(int num)
     {
@@ -39,7 +40,9 @@ AccelStepper* getStepper(int num)
     		return 0;
     	}
     }
-    ```
+
+```
+
     
 
 Plug RAMP board into USB. 
