@@ -22,6 +22,8 @@ cd ~/catkin_ws/src/ROS/w1bot_control/platformio/ramps
 mkdir lib
 cd lib
 ln -s ~/Arduino/libraries/ros_lib/ ros_lib
+ln -s ~/Arduino/libraries/Sevro/ Servo
+
 ```
 also install AccelStepper lib
 `git clone https://github.com/waspinator/AccelStepper.git`

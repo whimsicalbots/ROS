@@ -4,6 +4,7 @@
 #include <MultiStepper.h>
 #include <w1bot_control/MotorSpeed.h>
 #include "pins.h"
+#include <Servo.h>
 
 ros::NodeHandle nh;
 
@@ -13,6 +14,8 @@ AccelStepper stepper_Z(AccelStepper::DRIVER, Z_STEP_PIN, Z_DIR_PIN);
 AccelStepper stepper_E0(AccelStepper::DRIVER, E0_STEP_PIN, E0_DIR_PIN);
 AccelStepper stepper_E1(AccelStepper::DRIVER, E1_STEP_PIN, E1_DIR_PIN);
 
+Servo servo[MAX_SERVOS]; 
+
 MultiStepper multistepper;
 
 class MotorHandler
@@ -21,6 +24,7 @@ public:
   MotorHandler(byte pin, float period)
   : pin_(pin), period_(period),
     subscriber_("set_motor_speed", &MotorHandler::set_period_callback, this),
+    subsrciber_servo_("set_servo", &MotorHandler::set_servo_callback, this),
     service_server_("activate_blinker", &MotorHandler::service_callback, this)
   {}
 
@@ -28,6 +32,7 @@ public:
   {
     pinMode(pin_, OUTPUT);
     nh.subscribe(subscriber_);
+    nh.subscribe(subsrciber_servo_);
     nh.advertiseService(service_server_);
   }
 
@@ -50,6 +55,10 @@ public:
     }    
   }
 
+  void set_servo_callback(const w1bot_control::MotorSpeed& msg) {
+    servo[msg.motor].write(msg.speed);
+  }
+
   void service_callback(const std_srvs::SetBool::Request& req,
                               std_srvs::SetBool::Response& res)
   {
@@ -67,6 +76,7 @@ private:
   float period_;
   uint32_t last_time_;
   ros::Subscriber<w1bot_control::MotorSpeed, MotorHandler> subscriber_;
+  ros::Subscriber<w1bot_control::MotorSpeed, MotorHandler> subsrciber_servo_;
   ros::ServiceServer<std_srvs::SetBool::Request, std_srvs::SetBool::Response, MotorHandler> service_server_;
 };
 
@@ -108,6 +118,10 @@ void setup()
   nh.initNode();
   motorHandler.init(nh);
 
+  servo[0].attach(SERVO0_PIN);
+  servo[1].attach(SERVO1_PIN);
+  servo[2].attach(SERVO2_PIN);
+  servo[3].attach(SERVO3_PIN);
 }
 
 void loop()

@@ -20,3 +20,10 @@
 #define E1_DIR_PIN          34
 #define E1_ENABLE_PIN       30
 
+// servos
+#define MAX_SERVOS           4
+
+#define SERVO0_PIN          11
+#define SERVO1_PIN           6
+#define SERVO2_PIN           5
+#define SERVO3_PIN           4
