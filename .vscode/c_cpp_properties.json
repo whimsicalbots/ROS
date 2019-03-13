@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/emack/catkin_ws/devel/include",
+                "/opt/ros/melodic/include",
+                "/home/emack/catkin_ws/src/beginner_tutorials/include",
+                "/home/emack/catkin_ws/src/h4r_ramps/include",
+                "/home/emack/catkin_ws/src/my_test_robot/include",
+                "/usr/include"
+            ],
+            "name": "Linux",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}
