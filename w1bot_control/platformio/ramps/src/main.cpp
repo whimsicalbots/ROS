@@ -84,28 +84,28 @@ MotorHandler motorHandler(LED_BUILTIN, 500);
 
 void setup()
 {
-  stepper_X.setAcceleration(100000);
-  stepper_X.setMaxSpeed(100000);
+  stepper_X.setAcceleration(1000);
+  stepper_X.setMaxSpeed(1000);
   stepper_X.setEnablePin(X_ENABLE_PIN);
   stepper_X.setPinsInverted(false, false, true);
   
-  stepper_Y.setAcceleration(100000);
-  stepper_Y.setMaxSpeed(100000);
+  stepper_Y.setAcceleration(1000);
+  stepper_Y.setMaxSpeed(1000);
   stepper_Y.setEnablePin(Y_ENABLE_PIN);
   stepper_Y.setPinsInverted(true, false, true);  // invert direction so diff drive works //TODO should this be done differently?
   
-  stepper_Z.setAcceleration(100000);
-  stepper_Z.setMaxSpeed(100000);
+  stepper_Z.setAcceleration(1000);
+  stepper_Z.setMaxSpeed(1000);
   stepper_Z.setEnablePin(Z_ENABLE_PIN);
   stepper_Z.setPinsInverted(false, false, true);
   
-  stepper_E0.setAcceleration(100000);
-  stepper_E0.setMaxSpeed(100000);
+  stepper_E0.setAcceleration(1000);
+  stepper_E0.setMaxSpeed(1000);
   stepper_E0.setEnablePin(E0_ENABLE_PIN);
   stepper_E0.setPinsInverted(false, false, true);
   
-  stepper_E1.setAcceleration(100000);
-  stepper_E1.setMaxSpeed(100000);
+  stepper_E1.setAcceleration(1000);
+  stepper_E1.setMaxSpeed(1000);
   stepper_E1.setEnablePin(E1_ENABLE_PIN);
   stepper_E1.setPinsInverted(false, false, true);
   
