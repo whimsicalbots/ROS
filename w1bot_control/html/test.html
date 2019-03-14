@@ -31,20 +31,20 @@
 
   var cmdVel = new ROSLIB.Topic({
     ros : ros,
-    name : '/cmd_vel',
+    name : '/w1/w1bot_base_controller/cmd_vel',
     messageType : 'geometry_msgs/Twist'
   });
 
   var twist = new ROSLIB.Message({
     linear : {
-      x : 0.1,
-      y : 0.2,
-      z : 0.3
+      x : 10.0,
+      y : 0.0,
+      z : 0.0
     },
     angular : {
-      x : -0.1,
-      y : -0.2,
-      z : -0.3
+      x : 0.0,
+      y : 0.0,
+      z : 0.0
     }
   });
   cmdVel.publish(twist);
@@ -68,20 +68,19 @@
 
   var addTwoIntsClient = new ROSLIB.Service({
     ros : ros,
-    name : '/add_two_ints',
-    serviceType : 'rospy_tutorials/AddTwoInts'
+    name : '/activate_blinker',
+    serviceType : 'std_srvs/SetBool'
   });
 
   var request = new ROSLIB.ServiceRequest({
-    a : 1,
-    b : 2
+    data : false
   });
 
   addTwoIntsClient.callService(request, function(result) {
     console.log('Result for service call on '
       + addTwoIntsClient.name
       + ': '
-      + result.sum);
+      + result);
   });
 
   // Getting and setting a param value
