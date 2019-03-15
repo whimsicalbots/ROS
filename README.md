@@ -45,6 +45,9 @@ AccelStepper* getStepper(int num)
 
 ```
 
+Add FastLED lib
+`git clone https://github.com/FastLED/FastLED.git`
+
     
 
 Plug RAMP board into USB. 
