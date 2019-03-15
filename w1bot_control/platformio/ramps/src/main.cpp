@@ -138,6 +138,7 @@ void loop()
   motorHandler.run();
   nh.spinOnce();
   delay(1);
+/*
   leds[0] = CRGB::White;
   static uint8_t hue;
   for(int i = 0; i < NUM_LEDS/2; i++) {
@@ -148,4 +149,5 @@ void loop()
     FastLED.delay(33);
   }
   FastLED.show();
+  */
 }
