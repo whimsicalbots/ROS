@@ -12,6 +12,7 @@ namespace w1_ros_ramps
     
     private:
         ros::Publisher pub;
+        ros::Publisher pub_servo;
         hardware_interface::JointStateInterface jnt_state_interface;
         hardware_interface::VelocityJointInterface jnt_vel_interface;
         hardware_interface::PositionJointInterface jnt_pos_interface;
@@ -21,7 +22,8 @@ namespace w1_ros_ramps
         double *vel;
         double *eff;
         double *last_cmd;
-        
+        const int NUM_JOINTS = 3;
+
     public:
         W1HardwareInterface(ros::NodeHandle& root_nh);
         virtual ~W1HardwareInterface();

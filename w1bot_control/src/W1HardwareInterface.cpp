@@ -11,13 +11,15 @@ namespace w1_ros_ramps
         registerInterface(&jnt_pos_interface);
 
         pub = root_nh.advertise<w1bot_control::MotorSpeed>("/set_motor_speed", 10);
-        pos = new double[3];
-        vel = new double[3];
-        eff = new double[3];
-        cmd = new double[3];
-        last_cmd = new double[3];
+        pub_servo = root_nh.advertise<w1bot_control::MotorSpeed>("/set_servo", 10);
+
+        pos = new double[NUM_JOINTS];
+        vel = new double[NUM_JOINTS];
+        eff = new double[NUM_JOINTS];
+        cmd = new double[NUM_JOINTS];
+        last_cmd = new double[NUM_JOINTS];
         
-        for(int i = 0; i < 3; i++) {
+        for(int i = 0; i < NUM_JOINTS; i++) {
             pos[i] = 0;
             vel[i] = 0;
             eff[i] = 0;
@@ -56,7 +58,7 @@ namespace w1_ros_ramps
     void W1HardwareInterface::write() {
         bool cmd_changed = false;
 
-        for (int i  = 0; i < 2; i++) {
+        for (int i  = 0; i < NUM_JOINTS; i++) {
             if(last_cmd[i] != cmd[i]) {
                 last_cmd[i] = cmd[i];
                 cmd_changed = true;
@@ -64,15 +66,20 @@ namespace w1_ros_ramps
         }
 
         if(cmd_changed) {
-            for (int i  = 0; i < 2; i++) {
+            for (int i  = 0; i < NUM_JOINTS; i++) {
                 // send command 
-                ROS_INFO_STREAM("changed in: " << i << " cmd 0: " << cmd[0] << ", cmd 1: "<< cmd[1]);
+                ROS_INFO_STREAM("changed in: " << i << " cmd 0: " << cmd[0] << ", cmd 1: "<< cmd[1] << ", cmd 2: " << cmd[2]);
                 w1bot_control::MotorSpeed m_cmd;
-                m_cmd.motor = i;
                 m_cmd.speed = cmd[i];
-                pub.publish(m_cmd);
-            }
-            
+                
+                if(i == 2) {
+                    m_cmd.motor = 0;  //servo command
+                    pub_servo.publish(m_cmd);
+                }else {
+                    m_cmd.motor = i;
+                    pub.publish(m_cmd);
+                }               
+            }           
         }
     }
 
