@@ -8,15 +8,16 @@ namespace w1_ros_ramps
     
         registerInterface(&jnt_state_interface);
         registerInterface(&jnt_vel_interface);
+        registerInterface(&jnt_pos_interface);
 
         pub = root_nh.advertise<w1bot_control::MotorSpeed>("/set_motor_speed", 10);
-        pos = new double[2];
-        vel = new double[2];
-        eff = new double[2];
-        cmd = new double[2];
-        last_cmd = new double[2];
+        pos = new double[3];
+        vel = new double[3];
+        eff = new double[3];
+        cmd = new double[3];
+        last_cmd = new double[3];
         
-        for(int i = 0; i < 2; i++) {
+        for(int i = 0; i < 3; i++) {
             pos[i] = 0;
             vel[i] = 0;
             eff[i] = 0;
@@ -24,18 +25,27 @@ namespace w1_ros_ramps
             last_cmd[i] = NAN;
 
         }
-    //    std::string joint_name = "left_wheel_joint";
+        
+        // left_wheel_joint
         hardware_interface::JointStateHandle state_handle_l("left_wheel_joint", &pos[0], &vel[0], &eff[0]);
         jnt_state_interface.registerHandle(state_handle_l);
 
         hardware_interface::JointHandle joint_handle_vel_l(jnt_state_interface.getHandle("left_wheel_joint"), &cmd[0]);
         jnt_vel_interface.registerHandle(joint_handle_vel_l);
 
+        // right wheel joint
         hardware_interface::JointStateHandle state_handle_r("right_wheel_joint", &pos[1], &vel[1], &eff[1]);
         jnt_state_interface.registerHandle(state_handle_r);
 
         hardware_interface::JointHandle joint_handle_vel_r(jnt_state_interface.getHandle("right_wheel_joint"), &cmd[1]);
         jnt_vel_interface.registerHandle(joint_handle_vel_r);
+
+        // joint a
+        hardware_interface::JointStateHandle state_handle_a("joint_a", &pos[2], &vel[2], &eff[2]);
+        jnt_state_interface.registerHandle(state_handle_a);
+
+        hardware_interface::JointHandle joint_handle_pos_a(jnt_state_interface.getHandle("joint_a"), &cmd[2]);
+        jnt_pos_interface.registerHandle(joint_handle_pos_a);
 
         ROS_INFO_STREAM("done in costructer");
     }

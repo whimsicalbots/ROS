@@ -14,13 +14,13 @@ namespace w1_ros_ramps
         ros::Publisher pub;
         hardware_interface::JointStateInterface jnt_state_interface;
         hardware_interface::VelocityJointInterface jnt_vel_interface;
+        hardware_interface::PositionJointInterface jnt_pos_interface;
         
         double *cmd;
         double *pos;
         double *vel;
         double *eff;
         double *last_cmd;
-        //float power_factor = 10;
         
     public:
         W1HardwareInterface(ros::NodeHandle& root_nh);

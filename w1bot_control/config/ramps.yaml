@@ -1,7 +1,7 @@
 #Position
-rampsP_X:
+rampsP_A:
   type: position_controllers/JointPositionController
-  joint: joint_x
+  joint: joint_a
   
 rampsP_Y:
   type: position_controllers/JointPositionController
