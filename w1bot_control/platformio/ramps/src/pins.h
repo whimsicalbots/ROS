@@ -21,9 +21,12 @@
 #define E1_ENABLE_PIN       30
 
 // servos
-#define MAX_SERVOS           4
+#define MAX_SERVOS           3
 
 #define SERVO0_PIN          11
 #define SERVO1_PIN           6
 #define SERVO2_PIN           5
-#define SERVO3_PIN           4
+//#define SERVO3_PIN           4
+
+#define NUM_LEDS            64
+#define WS2812_PIN           4

@@ -5,6 +5,8 @@
 #include <w1bot_control/MotorSpeed.h>
 #include "pins.h"
 #include <Servo.h>
+#include "FastLED.h"
+
 
 ros::NodeHandle nh;
 
@@ -17,6 +19,8 @@ AccelStepper stepper_E1(AccelStepper::DRIVER, E1_STEP_PIN, E1_DIR_PIN);
 Servo servo[MAX_SERVOS]; 
 
 MultiStepper multistepper;
+
+CRGB leds[NUM_LEDS];
 
 class MotorHandler
 {
@@ -121,7 +125,9 @@ void setup()
   servo[0].attach(SERVO0_PIN);
   servo[1].attach(SERVO1_PIN);
   servo[2].attach(SERVO2_PIN);
-  servo[3].attach(SERVO3_PIN);
+
+  FastLED.addLeds<NEOPIXEL, WS2812_PIN>(leds, NUM_LEDS);
+  
 }
 
 void loop()
@@ -132,4 +138,6 @@ void loop()
   motorHandler.run();
   nh.spinOnce();
   delay(1);
+  leds[0] = CRGB::White;
+  FastLED.show();
 }
