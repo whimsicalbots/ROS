@@ -20,7 +20,7 @@ Servo servo[MAX_SERVOS];
 
 MultiStepper multistepper;
 
-CRGB leds[NUM_LEDS];
+CRGBArray<NUM_LEDS> leds;
 
 class MotorHandler
 {
@@ -139,7 +139,7 @@ void loop()
   nh.spinOnce();
   delay(1);
   leds[0] = CRGB::White;
-  static uint_t hue;
+  static uint8_t hue;
   for(int i = 0; i < NUM_LEDS/2; i++) {
     leds.fadeToBlackBy(40);
     leds[i] = CHSV(hue++, 255,255);
