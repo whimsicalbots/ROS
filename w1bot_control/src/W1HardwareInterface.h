@@ -22,7 +22,7 @@ namespace w1_ros_ramps
         double *vel;
         double *eff;
         double *last_cmd;
-        const int NUM_JOINTS = 3;
+        const static int NUM_JOINTS = 4;
 
     public:
         W1HardwareInterface(ros::NodeHandle& root_nh);

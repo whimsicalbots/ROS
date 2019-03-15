@@ -49,6 +49,13 @@ namespace w1_ros_ramps
         hardware_interface::JointHandle joint_handle_pos_a(jnt_state_interface.getHandle("joint_a"), &cmd[2]);
         jnt_pos_interface.registerHandle(joint_handle_pos_a);
 
+        // joint b
+        hardware_interface::JointStateHandle state_handle_b("joint_b", &pos[3], &vel[3], &eff[3]);
+        jnt_state_interface.registerHandle(state_handle_b);
+
+        hardware_interface::JointHandle joint_handle_pos_b(jnt_state_interface.getHandle("joint_b"), &cmd[3]);
+        jnt_pos_interface.registerHandle(joint_handle_pos_b);
+
         ROS_INFO_STREAM("done in costructer");
     }
 
@@ -68,18 +75,21 @@ namespace w1_ros_ramps
         if(cmd_changed) {
             for (int i  = 0; i < NUM_JOINTS; i++) {
                 // send command 
-                ROS_INFO_STREAM("changed in: " << i << " cmd 0: " << cmd[0] << ", cmd 1: "<< cmd[1] << ", cmd 2: " << cmd[2]);
+                ROS_INFO_STREAM("changed in: " << i << " cmd 0: " << cmd[0] << ", cmd 1: "<< cmd[1] << ", cmd 2: " << cmd[2] << ", cmd 3: " << cmd[3]);
                 w1bot_control::MotorSpeed m_cmd;
                 m_cmd.speed = cmd[i];
                 
                 if(i == 2) {
                     m_cmd.motor = 0;  //servo command
                     pub_servo.publish(m_cmd);
-                }else {
+                } else if(i == 3 ) {
+                    m_cmd.motor = 1;
+                    pub_servo.publish(m_cmd);
+                } else {
                     m_cmd.motor = i;
                     pub.publish(m_cmd);
-                }               
-            }           
+                }
+            }       
         }
     }
 

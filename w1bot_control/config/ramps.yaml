@@ -3,9 +3,9 @@ rampsP_A:
   type: position_controllers/JointPositionController
   joint: joint_a
   
-rampsP_Y:
+rampsP_B:
   type: position_controllers/JointPositionController
-  joint: joint_y
+  joint: joint_b
   
 rampsP_Z:
   type: position_controllers/JointPositionController
