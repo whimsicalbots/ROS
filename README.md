@@ -4,6 +4,24 @@ ROS related things
 
 ### Build ROS packages
 Assuming you have ROS installed...
+Install dependencies:
+```
+	sudo apt install ros-<distro>-hardware-interface
+	sudo apt install ros-<distro>-controller-manager
+	sudo apt install ros-<distro>-control-toolbox
+	sudo apt install ros-<distro>-rviz
+	sudo apt install ros-<distro>-xacro
+	sudo apt install ros-<distro>-rosserial-arduino
+	sudo apt install ros-<distro>-rosbridge-server
+	sudo apt install ros-<distro>-teleop-twist-keyboard
+	sudo apt install ros-<distro>-ros-control
+	sudo apt install ros-<distro>-ros-controllers
+	sudo apt install ros-<distro>-joy
+	sudo apt install ros-<distro>-rosbridge-suite
+```
+Install Arduino
+Install Arduino Servo library
+
 ```
 cd ~/catkin_ws/src
 git clone https://github.com/whimsicalbots/ROS.git
@@ -16,7 +34,7 @@ Currently using [platformio](https://platformio.org) to install firmware into Ar
 ``` 
 source ~/catkin_ws/install/setup.bash
 source ~/catkin_ws/devel/setup.bash
-rm -r ~/Arduino/libraries/ros_lib    #necessary so the next script can creat them
+rm -r ~/Arduino/libraries/ros_lib    #necessary so the next script can create them
 rosrun rosserial_arduino make_libraries.py ~/Arduino/libraries
 cd ~/catkin_ws/src/ROS/w1bot_control/platformio/ramps
 mkdir lib
@@ -58,4 +76,14 @@ Plug RAMP board into USB.
 ```
 cd ~/catkin_ws/src/ROS/w1bot_control/platformio/ramps
 pio run
+```
+
+Launch w1bot_control_serial, this will start roscore and start listening to the ramps controller
+```
+roslaunch w1bot_control w1bot_control_serial.launch
+```
+
+In another terminal, source install and devel, then 
+```
+roslaunch w1bot_control w1bot_control_teleop.launch
 ```
